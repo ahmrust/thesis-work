@@ -58,3 +58,4 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 Публичные ip адреса kibana, bastion и zabbix-server будут выведены в терминал 
 
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/1.png) 
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/2.png)
