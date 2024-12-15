@@ -72,3 +72,16 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/3.png)
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/4.png)
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/5.png)
+
+2.3 NAT-шлюз для доступа во внутреннюю сеть
+
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/6.png) 
+
+2.4 Группы безопасности соответствующих сервисов на входящий трафик только к нужным портам
+- bastion-sg (доступ открыт на 22 порт)
+- elastic-sg (доступ открыт на 22, 10050, 9200 порты)
+- kibana-sg (доступ открыт на 22, 10050, 5601 порты)
+- nginx-sg (доступ открыт на 22, 80, 10050 порты)
+- zabix-sg (доступ на 22, 8080, 10051 порты)
+
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/7.png)
