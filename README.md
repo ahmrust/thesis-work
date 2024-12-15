@@ -95,5 +95,30 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/12.png)
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/13.png)
 
-3. Дальнейшая установка и настройка  web-серверов, elasticsearch, zabbix производилась по ssh через bastion host плейбуками Ansible
+3. Дальнейшая установка и настройка  web-серверов, elasticsearch, zabbix производилась по ssh через bastion host плейбуками Ansible после написания inventory.ini
 
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/16.png)
+
+
+3.1 Установка nginx-1, nginx-2
+
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/14.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/18.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/19.png)
+
+3.2 Установка elasticsearch, kibana, filebeat производилась из заранее скачанных с зеркала deb.пакетов. Во время установки автоматически корректируется шаблон для установки filebeat (вносится пароль elastic в filebeat.yml.j2), а также в терминал выводится информация об успешности запуска сервиса и пароль пользователя и токен для подключения kibana
+
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/15.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/17.png)
+
+
+3.3 Установка zabbix-server, zabbix-agent
+
+
+4. Резервное копирование
+4.1 Для резервного копирования был написан манифест terraform snapshot.tf
+
+![alt text] ()
+![alt text]()
+
+### Инфраструктура готова к эксплуатации 
