@@ -1,0 +1,7 @@
+---
+
+- name: "install web"
+  hosts: web
+  become: yes
+  roles:
+    - nginx

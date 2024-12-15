@@ -1,0 +1,4 @@
+---
+# vars file for zabbix_server
+
+password_db: zabbix

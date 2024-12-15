@@ -1,0 +1,35 @@
+---
+# tasks file for zabbix_agent
+
+- name: download file repository zabbix repository
+  ansible.builtin.get_url:
+    url: "https://repo.zabbix.com/zabbix/6.4/debian/pool/main/z/zabbix-release/zabbix-release_6.4-1+debian12_all.deb"
+    dest: /home/ahmrust/
+
+- name: installing the zabbix repository
+  ansible.builtin.apt:
+    deb: /home/ahmrust/zabbix-release_6.4-1+debian12_all.deb
+
+- name: update cache repository
+  ansible.builtin.apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: install zabbix packages
+  ansible.builtin.apt:
+    name:
+      - zabbix-agent
+    state: present
+
+- name: edit config file zabbix agent
+  ansible.builtin.lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: "^Server="
+    line: Server=192.168.30.10
+
+- name: enable and restart zabbix-agent
+  ansible.builtin.systemd:
+    name: zabbix-agent
+    enabled: true
+    masked: no
+    state: restarted

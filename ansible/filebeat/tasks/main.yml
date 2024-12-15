@@ -1,0 +1,43 @@
+---
+# tasks file for filebeat
+
+- name: Check if filebeat is installed
+  command: dpkg-query -W filebeat
+  register: filebeat
+  failed_when: filebeat.rc > 1
+  changed_when: filebeat.rc == 1
+
+- name: Download filebeat
+  copy: 
+    src=/home/ahmrust/diplom/ansible/downloads/filebeat-8.9.2-amd64.deb
+    dest="/home/ahmrust/filebeat-8.9.2-amd64.deb"
+  when: filebeat.rc == 1
+
+- name: Install filebeat
+  apt: deb="/home/ahmrust/filebeat-8.9.2-amd64.deb"
+  when: filebeat.rc == 1
+
+- name: Customize filebeat.yml
+  template:
+    force: true
+    src: "{{ src_filebeat }}"
+    dest: "{{ dest_filebeat }}"
+    mode: 0644
+
+- name: enable and restart filebeat
+  ansible.builtin.systemd:
+    name: filebeat
+    enabled: true
+    masked: no
+    state: started
+
+- name: test filebeat
+  shell: "if ! systemctl is-active filebeat; then  echo 'inactive' ; fi"
+  register: filebeat_active
+  failed_when: False
+  changed_when: False
+- debug: var=filebeat_active
+- name: check_value_filebeat
+  debug: 
+    msg: "'filebeat is inactive' if filebeat_active.stdout=='inactive' else 'filebeat is active' "
+...

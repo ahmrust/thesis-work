@@ -1,0 +1,54 @@
+---
+# tasks file for kibana
+
+- name: Check if kibana is installed
+  command: dpkg-query -W kibana
+  register: kibana
+  failed_when: kibana.rc > 1
+  changed_when: kibana.rc == 1
+
+- name: Download kibana
+  copy: 
+    src=/home/ahmrust/diplom/ansible/downloads/kibana-8.9.2-amd64.deb
+    dest="/home/ahmrust/kibana-8.9.2-amd64.deb"
+  when: kibana.rc == 1
+
+- name: Install kibana
+  apt: deb="/home/ahmrust/kibana-8.9.2-amd64.deb"
+  when: kibana.rc == 1
+
+- name: edit setting kibana
+  ansible.builtin.lineinfile:
+    path: /etc/kibana/kibana.yml
+    regexp: '^#server.host: "localhost"'
+    line: "server.host: 0.0.0.0"
+
+- name: enable and restart kibana
+  ansible.builtin.systemd:
+    name: kibana
+    enabled: true
+    daemon_reload: true
+    masked: no
+    state: started
+
+- name: test kibana
+  shell: "if ! systemctl is-active kibana; then  echo 'inactive' ; fi"
+  register: kibana_active
+  failed_when: False
+  changed_when: False
+- debug: var=kibana_active
+- name: check_value_kibana
+  debug: 
+    msg: "'kibana is inactive' if kibana_active.stdout=='inactive' else 'service is active' "
+
+- name: connecting to elasticsearch
+  ansible.builtin.pause:
+    prompt: "Open kibana web and insert token."
+
+- name: save veryfication code
+  ansible.builtin.shell: /usr/share/kibana/bin/kibana-verification-code
+  register: ctlcode_result
+
+- name: Debug registered var
+  debug: var=ctlcode_result.stdout_lines
+...

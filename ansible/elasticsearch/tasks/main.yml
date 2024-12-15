@@ -1,0 +1,84 @@
+---
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    update_cache: yes
+    upgrade: yes
+
+
+- name: install packages for expect
+  ansible.builtin.apt:
+    name:
+      - python3-pexpect
+
+- name: Check if elasticsearch is installed
+  command: dpkg-query -W elasticsearch
+  register: elasticsearch
+  failed_when: elasticsearch.rc > 1
+  changed_when: elasticsearch.rc == 1
+
+- name: Download elasticsearch
+  copy: 
+    src=/home/ahmrust/diplom/ansible/downloads/elasticsearch-8.9.2-amd64.deb
+    dest="/home/ahmrust/elasticsearch-8.9.2-amd64.deb"
+  when: elasticsearch.rc == 1
+
+- name: Install elasticsearch
+  apt: deb="/home/ahmrust/elasticsearch-8.9.2-amd64.deb"
+  when: elasticsearch.rc == 1
+
+- name: edit config file elasticsearch
+  ansible.builtin.lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    regexp: "^#network.host: 192.168.0.1"
+    line: "network.host: 0.0.0.0"
+
+- name: enable and restart elastic
+  ansible.builtin.systemd:
+    name: elasticsearch
+    enabled: true
+    daemon_reload: true
+    masked: no
+    state: started
+
+- name: test elastic
+  shell: "if ! systemctl is-active elasticsearch; then  echo 'inactive' ; fi"
+  register: elasticsearch_active
+  failed_when: False
+  changed_when: False
+- debug: var=elasticsearch_active
+
+- name: check_value_elasticsearch
+  debug: 
+    msg: "'elasticsearch is inactive' if elasticsearch_active.stdout=='inactive' else 'service is active' "
+
+- name: reset password elastic
+  expect:
+    command: /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+    responses:
+      'Please confirm that you would like to continue' : 'y'
+  register: elastic_msg
+
+- name: import password
+  shell: echo "{{ elastic_msg.stdout }}" | sed -n '6p' | cut -c 12-31
+  register: elastic_password
+
+- name: edit config file filebieat.yml.j2, add password
+  ansible.builtin.lineinfile:
+    path: /home/ahmrust/diplom/ansible/filebeat/templates/filebeat.yml.j2
+    backrefs: yes
+    regexp: '^  #password: "changeme"' 
+    line: '  password: "{{ elastic_password.stdout }}"' 
+  delegate_to: 127.0.0.1
+  
+- name: output password
+  debug: var=elastic_msg.stdout_lines
+
+- name: token to kibana generation
+  ansible.builtin.shell: /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
+  register: token_result
+
+- name: output token to kibana
+  debug: var=token_result.stdout_lines
+
+...

@@ -1,0 +1,7 @@
+---
+
+- name: "install zabbix agent for VM"
+  hosts: web, kibana, elasticsearch
+  become: yes
+  roles:
+    - zabbix_agent

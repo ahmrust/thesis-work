@@ -1,0 +1,6 @@
+---
+# vars file for filebeat
+src_filebeat: "/home/ahmrust/diplom/ansible/filebeat/templates/filebeat.yml.j2"
+dest_filebeat: "/etc/filebeat/filebeat.yml"
+elastic_adress: 192.168.40.10
+kibana_adress: 192.168.30.20

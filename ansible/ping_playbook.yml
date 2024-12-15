@@ -1,0 +1,10 @@
+---
+# test
+- name: test VM
+  hosts: all
+  become: yes
+
+  tasks:
+
+  - name: ping servers
+    ping:

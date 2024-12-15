@@ -1,0 +1,7 @@
+---
+
+- name: "install elasticsearch"
+  hosts: elasticsearch
+  become: yes
+  roles:
+    - elasticsearch
