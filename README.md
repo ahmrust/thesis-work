@@ -94,6 +94,7 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/11.png)
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/12.png)
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/13.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/27.png)
 
 3. Дальнейшая установка и настройка  web-серверов, elasticsearch, zabbix производилась по ssh через bastion host плейбуками Ansible после написания inventory.ini
 
@@ -114,11 +115,16 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 
 3.3 Установка zabbix-server, zabbix-agent
 
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/21.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/22.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/23.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/24.png)
+
 
 4. Резервное копирование
-4.1 Для резервного копирования был написан манифест terraform snapshot.tf
+4.1 Для резервного копирования был написан манифест terraform snapshot.tf, ограничивающий время жизни snaphot в неделю. Сами snapshot настроены на ежедневное копирование. 
 
-![alt text] ()
-![alt text]()
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/25.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/26.png)
 
 ### Инфраструктура готова к эксплуатации 
