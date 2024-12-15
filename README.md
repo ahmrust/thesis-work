@@ -85,3 +85,15 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 - zabix-sg (доступ на 22, 8080, 10051 порты)
 
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/7.png)
+
+2.5 Балансировщик нагрузки для распределения запросов на сайт и обеспечения безопасности
+
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/8.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/9.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/10.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/11.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/12.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/13.png)
+
+3. Дальнейшая установка и настройка  web-серверов, elasticsearch, zabbix производилась по ssh через bastion host плейбуками Ansible
+
