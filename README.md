@@ -54,8 +54,21 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 - bastion host
 - elastic
 - kibana
-- zabbix-server
+- zabbix-server.
+
 Публичные ip адреса kibana, bastion и zabbix-server будут выведены в терминал 
 
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/1.png) 
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/2.png)
+
+2.2 Сеть и подсети в разных зонах 
+- nginx-1 (192.168.10.10 в ru-central1-a)
+- nginx-2 (192.168.20.10 в ru-central1-b)
+- bastion-host (192.168.30.30 в ru-central1-d)
+- elastic (192.168.40.10 в ru-central1-d)
+- kibana (192.168.30.20 в ru-central1-d)
+- zabix-server (192.168.30.10 в ru-central1-d)
+
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/3.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/4.png)
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/5.png)
