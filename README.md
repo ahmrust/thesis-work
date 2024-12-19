@@ -111,7 +111,7 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/15.png)
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/17.png)
-
+![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/20.png)
 
 3.3 Установка zabbix-server, zabbix-agent
 
@@ -127,4 +127,10 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/25.png)
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/26.png)
 
-### Инфраструктура готова к эксплуатации 
+### Инфраструктура готова к эксплуатации
+P.S. На некоторых скриншотах возможно зафиксированы неверные публичные ip адреса, т.к. работа выполнялась с остановкой виртуальных машин с последующей сменой публичных адресов.
+На момент перевода виртуальных машин в разряд непрерываемых были получены следующие публичные адреса:
+bastion 84.201.181.19
+kibana 130.193.59.222
+zabbix-server 51.250.47.145
+balancer 158.160.144.182
