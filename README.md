@@ -67,7 +67,7 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 - bastion-host (192.168.30.30 в ru-central1-d)
 - elastic (192.168.40.10 в ru-central1-d)
 - kibana (192.168.30.20 в ru-central1-d)
-- zabix-server (192.168.30.10 в ru-central1-d)
+- zabbix-server (192.168.30.10 в ru-central1-d)
 
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/3.png)
 ![alt text](https://github.com/ahmrust/thesis-work/blob/main/img/4.png)
